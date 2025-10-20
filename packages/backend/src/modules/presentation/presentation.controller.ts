@@ -87,7 +87,7 @@ export class PresentationController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   async deletePresentation(@Param('id') id: string, @Request() req) {
-    await this.presentationService.delete(id, req.user.userId);
+    await this.presentationService.delete(id, req.user.id);
     return { message: 'Presentation deleted successfully' };
   }
 }

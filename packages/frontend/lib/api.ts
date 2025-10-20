@@ -1,3 +1,10 @@
+export const presentationApi = {
+  delete: async (id: string) => {
+    return fetchAPI(`/presentations/${id}`, {
+      method: 'DELETE',
+    })
+  },
+};
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 export async function fetchAPI(endpoint: string, options: RequestInit = {}) {

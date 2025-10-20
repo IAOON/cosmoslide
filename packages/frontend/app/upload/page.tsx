@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { uploadApi } from '@/lib/api'
+import { uploadApi, userApi, authApi, presentationApi } from '@/lib/api'
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
   const [uploadResult, setUploadResult] = useState<{ key: string; url: string } | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([])
+  const [myPresentations, setMyPresentations] = useState<any[]>([])
   const [dragActive, setDragActive] = useState(false)
   const [previewFile, setPreviewFile] = useState<{ key: string; url: string } | null>(null)
   const [title, setTitle] = useState<string>('')
@@ -22,15 +22,17 @@ export default function UploadPage() {
       router.push('/auth/signin')
       return
     }
-    fetchUploadedFiles()
+    fetchMyPresentations()
   }, [])
 
-  const fetchUploadedFiles = async () => {
+  const fetchMyPresentations = async () => {
     try {
-      const files = await uploadApi.listFiles()
-      setUploadedFiles(files)
+      // Get current user info
+      const me = await authApi.getMe()
+      const presentations = await userApi.getUserPresentations(me.username)
+      setMyPresentations(presentations || [])
     } catch (err: any) {
-      console.error('Failed to fetch files:', err)
+      console.error('Failed to fetch presentations:', err)
     }
   }
 
@@ -100,8 +102,8 @@ export default function UploadPage() {
       })
       setFile(null)
       setTitle('')
-      // Refresh the file list
-      await fetchUploadedFiles()
+      // Refresh the presentations list
+      await fetchMyPresentations()
     } catch (err: any) {
       setError(err.message || 'Upload failed')
     } finally {
@@ -109,14 +111,14 @@ export default function UploadPage() {
     }
   }
 
-  const handleDelete = async (key: string) => {
-    if (!confirm('Are you sure you want to delete this file?')) {
+    const handleDelete = async (id: string) => {
+      if (!confirm('Are you sure you want to delete this presentation?')) {
       return
     }
 
     try {
-      await uploadApi.deleteFile(key)
-      await fetchUploadedFiles()
+      await presentationApi.delete(id)
+      await fetchMyPresentations()
     } catch (err: any) {
       setError(err.message || 'Delete failed')
     }
@@ -334,39 +336,41 @@ export default function UploadPage() {
           </div>
         )}
 
-        {/* Uploaded Files List */}
+        {/* My Presentations List */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-            Uploaded PDF Files
+            My Presentations
           </h2>
-          {uploadedFiles.length === 0 ? (
+          {myPresentations.length === 0 ? (
             <p className="text-gray-600 dark:text-gray-400 text-center py-8">
-              No PDF files uploaded yet
+              No presentations uploaded yet
             </p>
           ) : (
             <div className="space-y-2">
-              {uploadedFiles.map((fileKey) => (
+              {myPresentations.map((presentation) => (
                 <div
-                  key={fileKey}
+                  key={presentation.id}
                   className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
                 >
                   <div className="flex items-center flex-1 min-w-0">
-                    <svg className="w-5 h-5 text-red-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-blue-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
                     </svg>
                     <span className="text-sm text-gray-700 dark:text-gray-300 truncate">
-                      {fileKey}
+                      {presentation.title}
                     </span>
                   </div>
                   <div className="flex gap-2 ml-3">
-                    <button
-                      onClick={() => handlePreview(fileKey)}
+                    <a
+                      href={presentation.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="px-3 py-1 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                     >
-                      Preview
-                    </button>
+                      View
+                    </a>
                     <button
-                      onClick={() => handleDelete(fileKey)}
+                      onClick={() => handleDelete(presentation.id)}
                       className="px-3 py-1 text-sm text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                     >
                       Delete

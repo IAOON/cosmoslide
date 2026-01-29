@@ -15,14 +15,14 @@
     "@tanstack/react-router": "1.157.16",
     "@tanstack/react-start": "1.157.16",
     "axios": "^1.7.9",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@tanstack/router-devtools": "1.157.16",
     "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.6.0",
     "nitro": "3.0.1-alpha.2",
     "typescript": "^5",

@@ -3,9 +3,16 @@
   "version": "0.0.1",
   "description": "Federated platform for sharing presentations and microblogging built on ActivityPub",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react",
+      "**/react-dom",
+      "@cosmoslide/admin/**"
+    ]
+  },
   "scripts": {
     "dev": "concurrently \"yarn workspace @cosmoslide/backend start:dev\" \"yarn workspace @cosmoslide/frontend dev\"",
     "dev:backend": "yarn workspace @cosmoslide/backend start:dev",

@@ -1,4 +1,9 @@
-import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import {
+  createFileRoute,
+  redirect,
+  useNavigate,
+  Link,
+} from '@tanstack/react-router';
 import { useState, useEffect, useRef } from 'react';
 import { userApi } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
@@ -95,6 +100,46 @@ function PresentationsPage() {
           <p className="mt-2 text-gray-600 dark:text-gray-400">
             Here are your uploaded PDF presentations.
           </p>
+          <div className="flex gap-3 mt-4">
+            <Link
+              to="/upload"
+              className="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-medium"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
+              </svg>
+              Upload PDF
+            </Link>
+            <Link
+              to="/presentations/new"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                />
+              </svg>
+              Create from Markdown
+            </Link>
+          </div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           {presentations.length === 0 ? (

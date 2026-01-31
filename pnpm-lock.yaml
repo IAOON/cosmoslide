@@ -269,6 +269,9 @@ importers:
 
   packages/frontend:
     dependencies:
+      '@cosmoslide/editor':
+        specifier: workspace:*
+        version: link:../editor
       '@tanstack/react-query':
         specifier: ^5.90.0
         version: 5.90.20(react@19.1.0)

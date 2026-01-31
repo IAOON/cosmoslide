@@ -21,6 +21,7 @@ function UploadPage() {
   const [error, setError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [title, setTitle] = useState('');
+  const [comment, setComment] = useState('');
   const [presentationResult, setPresentationResult] = useState<{
     id: string;
     title: string;
@@ -88,7 +89,11 @@ function UploadPage() {
     setPresentationResult(null);
 
     try {
-      const result = await uploadApi.uploadPresentation(file, title);
+      // Combine title and comment
+      const finalTitle = comment.trim()
+        ? `${title} - ${comment.trim()}`
+        : title;
+      const result = await uploadApi.uploadPresentation(file, finalTitle);
       setPresentationResult({
         id: result.id,
         title: result.title,
@@ -96,6 +101,7 @@ function UploadPage() {
       });
       setFile(null);
       setTitle('');
+      setComment('');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Upload failed');
     } finally {
@@ -139,6 +145,26 @@ function UploadPage() {
               placeholder="Enter presentation title"
               className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
+          </div>
+
+          <div className="mb-6">
+            <label
+              htmlFor="comment"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Comment <span className="text-gray-400">(optional)</span>
+            </label>
+            <textarea
+              id="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Add a note or description"
+              rows={3}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            />
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Comment will be appended to the title
+            </p>
           </div>
 
           <div
@@ -211,6 +237,7 @@ function UploadPage() {
                 onClick={() => {
                   setFile(null);
                   setTitle('');
+                  setComment('');
                 }}
                 className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-medium"
               >

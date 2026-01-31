@@ -14,6 +14,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@cosmoslide/editor": "workspace:*",
     "@tanstack/react-query": "^5.90.0",
     "@tanstack/react-router": "1.157.16",
     "@tanstack/react-start": "1.157.16",

@@ -20,6 +20,7 @@ import { Route as UsernameRouteImport } from './routes/$username';
 import { Route as IndexRouteImport } from './routes/index';
 import { Route as PresentationsIndexRouteImport } from './routes/presentations/index';
 import { Route as TimelinePublicRouteImport } from './routes/timeline/public';
+import { Route as PresentationsNewRouteImport } from './routes/presentations/new';
 import { Route as PresentationsIdRouteImport } from './routes/presentations/$id';
 import { Route as NotesIdRouteImport } from './routes/notes/$id';
 import { Route as AuthVerifyRouteImport } from './routes/auth/verify';
@@ -84,6 +85,11 @@ const TimelinePublicRoute = TimelinePublicRouteImport.update({
   path: '/timeline/public',
   getParentRoute: () => rootRouteImport,
 } as any);
+const PresentationsNewRoute = PresentationsNewRouteImport.update({
+  id: '/presentations/new',
+  path: '/presentations/new',
+  getParentRoute: () => rootRouteImport,
+} as any);
 const PresentationsIdRoute = PresentationsIdRouteImport.update({
   id: '/presentations/$id',
   path: '/presentations/$id',
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/auth/verify': typeof AuthVerifyRoute;
   '/notes/$id': typeof NotesIdRoute;
   '/presentations/$id': typeof PresentationsIdRoute;
+  '/presentations/new': typeof PresentationsNewRoute;
   '/timeline/public': typeof TimelinePublicRoute;
   '/presentations/': typeof PresentationsIndexRoute;
 }
@@ -164,6 +171,7 @@ export interface FileRoutesByTo {
   '/auth/verify': typeof AuthVerifyRoute;
   '/notes/$id': typeof NotesIdRoute;
   '/presentations/$id': typeof PresentationsIdRoute;
+  '/presentations/new': typeof PresentationsNewRoute;
   '/timeline/public': typeof TimelinePublicRoute;
   '/presentations': typeof PresentationsIndexRoute;
 }
@@ -186,6 +194,7 @@ export interface FileRoutesById {
   '/auth/verify': typeof AuthVerifyRoute;
   '/notes/$id': typeof NotesIdRoute;
   '/presentations/$id': typeof PresentationsIdRoute;
+  '/presentations/new': typeof PresentationsNewRoute;
   '/timeline/public': typeof TimelinePublicRoute;
   '/presentations/': typeof PresentationsIndexRoute;
 }
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/auth/verify'
     | '/notes/$id'
     | '/presentations/$id'
+    | '/presentations/new'
     | '/timeline/public'
     | '/presentations/';
   fileRoutesByTo: FileRoutesByTo;
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/auth/verify'
     | '/notes/$id'
     | '/presentations/$id'
+    | '/presentations/new'
     | '/timeline/public'
     | '/presentations';
   id:
@@ -251,6 +262,7 @@ export interface FileRouteTypes {
     | '/auth/verify'
     | '/notes/$id'
     | '/presentations/$id'
+    | '/presentations/new'
     | '/timeline/public'
     | '/presentations/';
   fileRoutesById: FileRoutesById;
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   AuthVerifyRoute: typeof AuthVerifyRoute;
   NotesIdRoute: typeof NotesIdRoute;
   PresentationsIdRoute: typeof PresentationsIdRoute;
+  PresentationsNewRoute: typeof PresentationsNewRoute;
   TimelinePublicRoute: typeof TimelinePublicRoute;
   PresentationsIndexRoute: typeof PresentationsIndexRoute;
 }
@@ -351,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/timeline/public';
       fullPath: '/timeline/public';
       preLoaderRoute: typeof TimelinePublicRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/presentations/new': {
+      id: '/presentations/new';
+      path: '/presentations/new';
+      fullPath: '/presentations/new';
+      preLoaderRoute: typeof PresentationsNewRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     '/presentations/$id': {
@@ -443,6 +463,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthVerifyRoute: AuthVerifyRoute,
   NotesIdRoute: NotesIdRoute,
   PresentationsIdRoute: PresentationsIdRoute,
+  PresentationsNewRoute: PresentationsNewRoute,
   TimelinePublicRoute: TimelinePublicRoute,
   PresentationsIndexRoute: PresentationsIndexRoute,
 };

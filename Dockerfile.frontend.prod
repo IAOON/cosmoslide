@@ -11,6 +11,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY packages/frontend/package.json ./packages/frontend/
 COPY packages/backend/package.json ./packages/backend/
 COPY packages/admin/package.json ./packages/admin/
+COPY packages/editor/package.json ./packages/editor/
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -26,10 +27,15 @@ WORKDIR /app
 # Copy source files and package configs
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY packages/frontend ./packages/frontend
+COPY packages/editor ./packages/editor
 
 # Copy dependencies from deps stage (after source to avoid overwrite)
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/packages/frontend/node_modules ./packages/frontend/node_modules
+COPY --from=deps /app/packages/editor/node_modules ./packages/editor/node_modules
+
+# Build the editor package first (frontend depends on it)
+RUN pnpm --filter @cosmoslide/editor build
 
 # Build arguments for environment variables
 ARG VITE_API_URL

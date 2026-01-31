@@ -162,6 +162,41 @@ export const followRequestApi = {
     }),
 };
 
+export interface InvitationUser {
+  id: string;
+  username: string;
+  displayName: string;
+}
+
+export interface Invitation {
+  id: string;
+  email: string;
+  code: string;
+  note: string | null;
+  expiresAt: string;
+  usedCount: number;
+  maxUses: number;
+  createdAt: string;
+  usedBy: InvitationUser | null;
+  usedAt: string | null;
+  isValid: boolean;
+}
+
+export interface InvitationsResponse {
+  invitations: Invitation[];
+  quota: number;
+}
+
+export const invitationApi = {
+  getInvitations: (): Promise<InvitationsResponse> => fetchAPI('/invitations'),
+
+  sendInvitation: (email: string, message?: string) =>
+    fetchAPI('/invitations', {
+      method: 'POST',
+      body: JSON.stringify({ email, message }),
+    }),
+};
+
 export const uploadApi = {
   uploadFile: async (file: File): Promise<{ key: string; url: string }> => {
     const formData = new FormData();

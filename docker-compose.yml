@@ -28,7 +28,7 @@ services:
         condition: service_healthy
     networks:
       - dev
-    command: yarn workspace @cosmoslide/backend start:dev
+    command: pnpm --filter @cosmoslide/backend start:dev
 
   # V1 Frontend (TanStack Start + Nitro)
   frontend:
@@ -54,7 +54,7 @@ services:
       - backend
     networks:
       - dev
-    command: yarn workspace @cosmoslide/frontend dev --host 0.0.0.0
+    command: pnpm --filter @cosmoslide/frontend dev --host 0.0.0.0
 
   # Admin Panel
   admin:

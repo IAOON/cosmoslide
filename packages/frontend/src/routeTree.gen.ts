@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root';
 import { Route as UploadRouteImport } from './routes/upload';
 import { Route as SettingsRouteImport } from './routes/settings';
 import { Route as SearchRouteImport } from './routes/search';
+import { Route as InvitationsRouteImport } from './routes/invitations';
 import { Route as HomeRouteImport } from './routes/home';
 import { Route as FollowRequestsRouteImport } from './routes/follow-requests';
 import { Route as DashboardRouteImport } from './routes/dashboard';
@@ -22,6 +23,7 @@ import { Route as TimelinePublicRouteImport } from './routes/timeline/public';
 import { Route as PresentationsIdRouteImport } from './routes/presentations/$id';
 import { Route as NotesIdRouteImport } from './routes/notes/$id';
 import { Route as AuthVerifyRouteImport } from './routes/auth/verify';
+import { Route as AuthSignupRouteImport } from './routes/auth/signup';
 import { Route as AuthSigninRouteImport } from './routes/auth/signin';
 import { Route as UsernamePresentationsRouteImport } from './routes/$username/presentations';
 import { Route as UsernameFollowingRouteImport } from './routes/$username/following';
@@ -40,6 +42,11 @@ const SettingsRoute = SettingsRouteImport.update({
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any);
+const InvitationsRoute = InvitationsRouteImport.update({
+  id: '/invitations',
+  path: '/invitations',
   getParentRoute: () => rootRouteImport,
 } as any);
 const HomeRoute = HomeRouteImport.update({
@@ -92,6 +99,11 @@ const AuthVerifyRoute = AuthVerifyRouteImport.update({
   path: '/auth/verify',
   getParentRoute: () => rootRouteImport,
 } as any);
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/auth/signup',
+  path: '/auth/signup',
+  getParentRoute: () => rootRouteImport,
+} as any);
 const AuthSigninRoute = AuthSigninRouteImport.update({
   id: '/auth/signin',
   path: '/auth/signin',
@@ -119,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute;
   '/follow-requests': typeof FollowRequestsRoute;
   '/home': typeof HomeRoute;
+  '/invitations': typeof InvitationsRoute;
   '/search': typeof SearchRoute;
   '/settings': typeof SettingsRoute;
   '/upload': typeof UploadRoute;
@@ -126,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/$username/following': typeof UsernameFollowingRoute;
   '/$username/presentations': typeof UsernamePresentationsRoute;
   '/auth/signin': typeof AuthSigninRoute;
+  '/auth/signup': typeof AuthSignupRoute;
   '/auth/verify': typeof AuthVerifyRoute;
   '/notes/$id': typeof NotesIdRoute;
   '/presentations/$id': typeof PresentationsIdRoute;
@@ -138,6 +152,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute;
   '/follow-requests': typeof FollowRequestsRoute;
   '/home': typeof HomeRoute;
+  '/invitations': typeof InvitationsRoute;
   '/search': typeof SearchRoute;
   '/settings': typeof SettingsRoute;
   '/upload': typeof UploadRoute;
@@ -145,6 +160,7 @@ export interface FileRoutesByTo {
   '/$username/following': typeof UsernameFollowingRoute;
   '/$username/presentations': typeof UsernamePresentationsRoute;
   '/auth/signin': typeof AuthSigninRoute;
+  '/auth/signup': typeof AuthSignupRoute;
   '/auth/verify': typeof AuthVerifyRoute;
   '/notes/$id': typeof NotesIdRoute;
   '/presentations/$id': typeof PresentationsIdRoute;
@@ -158,6 +174,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute;
   '/follow-requests': typeof FollowRequestsRoute;
   '/home': typeof HomeRoute;
+  '/invitations': typeof InvitationsRoute;
   '/search': typeof SearchRoute;
   '/settings': typeof SettingsRoute;
   '/upload': typeof UploadRoute;
@@ -165,6 +182,7 @@ export interface FileRoutesById {
   '/$username/following': typeof UsernameFollowingRoute;
   '/$username/presentations': typeof UsernamePresentationsRoute;
   '/auth/signin': typeof AuthSigninRoute;
+  '/auth/signup': typeof AuthSignupRoute;
   '/auth/verify': typeof AuthVerifyRoute;
   '/notes/$id': typeof NotesIdRoute;
   '/presentations/$id': typeof PresentationsIdRoute;
@@ -179,6 +197,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/follow-requests'
     | '/home'
+    | '/invitations'
     | '/search'
     | '/settings'
     | '/upload'
@@ -186,6 +205,7 @@ export interface FileRouteTypes {
     | '/$username/following'
     | '/$username/presentations'
     | '/auth/signin'
+    | '/auth/signup'
     | '/auth/verify'
     | '/notes/$id'
     | '/presentations/$id'
@@ -198,6 +218,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/follow-requests'
     | '/home'
+    | '/invitations'
     | '/search'
     | '/settings'
     | '/upload'
@@ -205,6 +226,7 @@ export interface FileRouteTypes {
     | '/$username/following'
     | '/$username/presentations'
     | '/auth/signin'
+    | '/auth/signup'
     | '/auth/verify'
     | '/notes/$id'
     | '/presentations/$id'
@@ -217,6 +239,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/follow-requests'
     | '/home'
+    | '/invitations'
     | '/search'
     | '/settings'
     | '/upload'
@@ -224,6 +247,7 @@ export interface FileRouteTypes {
     | '/$username/following'
     | '/$username/presentations'
     | '/auth/signin'
+    | '/auth/signup'
     | '/auth/verify'
     | '/notes/$id'
     | '/presentations/$id'
@@ -237,10 +261,12 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute;
   FollowRequestsRoute: typeof FollowRequestsRoute;
   HomeRoute: typeof HomeRoute;
+  InvitationsRoute: typeof InvitationsRoute;
   SearchRoute: typeof SearchRoute;
   SettingsRoute: typeof SettingsRoute;
   UploadRoute: typeof UploadRoute;
   AuthSigninRoute: typeof AuthSigninRoute;
+  AuthSignupRoute: typeof AuthSignupRoute;
   AuthVerifyRoute: typeof AuthVerifyRoute;
   NotesIdRoute: typeof NotesIdRoute;
   PresentationsIdRoute: typeof PresentationsIdRoute;
@@ -269,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/search';
       fullPath: '/search';
       preLoaderRoute: typeof SearchRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/invitations': {
+      id: '/invitations';
+      path: '/invitations';
+      fullPath: '/invitations';
+      preLoaderRoute: typeof InvitationsRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     '/home': {
@@ -341,6 +374,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthVerifyRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/auth/signup': {
+      id: '/auth/signup';
+      path: '/auth/signup';
+      fullPath: '/auth/signup';
+      preLoaderRoute: typeof AuthSignupRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/auth/signin': {
       id: '/auth/signin';
       path: '/auth/signin';
@@ -394,10 +434,12 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   FollowRequestsRoute: FollowRequestsRoute,
   HomeRoute: HomeRoute,
+  InvitationsRoute: InvitationsRoute,
   SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
   UploadRoute: UploadRoute,
   AuthSigninRoute: AuthSigninRoute,
+  AuthSignupRoute: AuthSignupRoute,
   AuthVerifyRoute: AuthVerifyRoute,
   NotesIdRoute: NotesIdRoute,
   PresentationsIdRoute: PresentationsIdRoute,

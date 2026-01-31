@@ -3,35 +3,23 @@
   "version": "0.0.1",
   "description": "Federated platform for sharing presentations and microblogging built on ActivityPub",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ],
-    "nohoist": [
-      "**/react",
-      "**/react-dom",
-      "**/@tanstack/react-start",
-      "**/@tanstack/react-router",
-      "@cosmoslide/admin/**"
-    ]
-  },
   "scripts": {
-    "dev": "concurrently \"yarn workspace @cosmoslide/backend start:dev\" \"yarn workspace @cosmoslide/frontend dev\"",
-    "dev:backend": "yarn workspace @cosmoslide/backend start:dev",
-    "dev:frontend": "yarn workspace @cosmoslide/frontend dev",
-    "build": "yarn workspaces run build",
-    "build:backend": "yarn workspace @cosmoslide/backend build",
-    "build:frontend": "yarn workspace @cosmoslide/frontend build",
-    "test": "yarn workspace @cosmoslide/backend test",
-    "test:watch": "yarn workspace @cosmoslide/backend test:watch",
-    "lint": "yarn workspaces run lint",
+    "dev": "concurrently \"pnpm --filter @cosmoslide/backend start:dev\" \"pnpm --filter @cosmoslide/frontend dev\"",
+    "dev:backend": "pnpm --filter @cosmoslide/backend start:dev",
+    "dev:frontend": "pnpm --filter @cosmoslide/frontend dev",
+    "build": "pnpm -r build",
+    "build:backend": "pnpm --filter @cosmoslide/backend build",
+    "build:frontend": "pnpm --filter @cosmoslide/frontend build",
+    "test": "pnpm --filter @cosmoslide/backend test",
+    "test:watch": "pnpm --filter @cosmoslide/backend test:watch",
+    "lint": "pnpm -r lint",
     "format": "prettier --write \"packages/**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "generate-key": "yarn workspace @cosmoslide/backend generate-key",
-    "create-user": "yarn workspace @cosmoslide/backend create-user",
-    "grant-admin": "yarn workspace @cosmoslide/backend grant-admin",
-    "migration:generate": "yarn workspace @cosmoslide/backend migration:generate",
-    "migration:run": "yarn workspace @cosmoslide/backend migration:run",
-    "migration:revert": "yarn workspace @cosmoslide/backend migration:revert",
+    "generate-key": "pnpm --filter @cosmoslide/backend generate-key",
+    "create-user": "pnpm --filter @cosmoslide/backend create-user",
+    "grant-admin": "pnpm --filter @cosmoslide/backend grant-admin",
+    "migration:generate": "pnpm --filter @cosmoslide/backend migration:generate",
+    "migration:run": "pnpm --filter @cosmoslide/backend migration:run",
+    "migration:revert": "pnpm --filter @cosmoslide/backend migration:revert",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -44,5 +32,12 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.4.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "@swc/core",
+      "esbuild"
+    ]
   }
 }

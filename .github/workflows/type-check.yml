@@ -20,20 +20,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Type check backend
-        run: yarn workspace @cosmoslide/backend exec tsc --noEmit
+        run: pnpm --filter @cosmoslide/backend exec tsc --noEmit
 
       - name: Type check frontend
-        run: yarn workspace @cosmoslide/frontend exec tsc --noEmit
+        run: pnpm --filter @cosmoslide/frontend exec tsc --noEmit
 
       - name: Type check admin
-        run: yarn workspace @cosmoslide/admin exec tsc --noEmit
+        run: pnpm --filter @cosmoslide/admin exec tsc --noEmit

@@ -24,7 +24,7 @@
 
 - Node.js 22+
 - PostgreSQL 16+
-- Yarn package manager
+- pnpm package manager
 - Docker & Docker Compose (recommended)
 
 ### Quick Start (Development)
@@ -35,7 +35,7 @@ git clone https://github.com/yourusername/cosmoslide.git
 cd cosmoslide
 
 # Install dependencies
-yarn install
+pnpm install
 
 # Set up environment variables
 cp .env.example .env
@@ -45,7 +45,7 @@ cp .env.example .env
 docker-compose up
 
 # Or run locally
-yarn dev
+pnpm dev
 ```
 
 Access the application at:
@@ -94,10 +94,10 @@ For detailed deployment instructions, see [Production Deployment Guide](docs/pro
 ## Development
 
 ```bash
-yarn dev          # Start development servers
-yarn build        # Build for production
-yarn test         # Run tests
-yarn lint         # Lint code
+pnpm dev          # Start development servers
+pnpm build        # Build for production
+pnpm test         # Run tests
+pnpm lint         # Lint code
 ```
 
 ## Federation

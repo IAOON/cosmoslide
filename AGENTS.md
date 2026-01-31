@@ -13,22 +13,22 @@ A federated microblogging application demonstrating Fedify (ActivityPub framewor
 
 ```bash
 # Development
-yarn dev                    # Run frontend and backend concurrently
+pnpm dev                    # Run frontend and backend concurrently
 docker-compose up          # Run with PostgreSQL included
 
 # Building & Testing
-yarn build                 # Build all packages
-yarn test                  # Run tests
-yarn lint                  # Lint code
+pnpm build                 # Build all packages
+pnpm test                  # Run tests
+pnpm lint                  # Lint code
 
 # Database Setup
 cp .env.example .env       # Configure environment variables
 # PostgreSQL is auto-configured with docker-compose
 
 # Database Migrations (Rails-style workflow)
-yarn migration:generate <Name>  # Auto-detect entity changes and create migration
-yarn migration:run              # Apply pending migrations
-yarn migration:revert           # Rollback last migration
+pnpm migration:generate <Name>  # Auto-detect entity changes and create migration
+pnpm migration:run              # Apply pending migrations
+pnpm migration:revert           # Rollback last migration
 ```
 
 ## Architecture Highlights
@@ -57,7 +57,7 @@ We use a **dual-database approach** for seamless development with automatic migr
 
 ### Workflow
 1. **Modify entities** in `packages/backend/src/entities/`
-2. **Generate migration**: `yarn migration:generate AddUserRole`
+2. **Generate migration**: `pnpm migration:generate AddUserRole`
    - Compares entities with migration DB (5433)
    - Detects differences and creates migration file
    - Auto-applies migration to migration DB to keep it in sync
@@ -67,13 +67,13 @@ We use a **dual-database approach** for seamless development with automatic migr
 ### Commands
 ```bash
 # Create migration from entity changes
-yarn migration:generate <MigrationName>
+pnpm migration:generate <MigrationName>
 
 # Manually run pending migrations (dev DB)
-yarn migration:run
+pnpm migration:run
 
 # Rollback last migration
-yarn migration:revert
+pnpm migration:revert
 ```
 
 ### Why This Approach?

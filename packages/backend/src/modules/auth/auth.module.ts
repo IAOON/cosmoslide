@@ -4,12 +4,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
+import { InvitationController } from './invitation.controller';
 import { AuthService } from './auth.service';
 import { InvitationService } from './invitation.service';
 import { User, Invitation, MagicLink, Actor, KeyPair } from '../../entities';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { MailModule } from '../mail/mail.module';
 import { FederationModule } from '../federation/federation.module';
+import { MicrobloggingModule } from '../microblogging/microblogging.module';
 import { UserService } from '../user/user.service';
 
 @Module({
@@ -18,6 +20,7 @@ import { UserService } from '../user/user.service';
     PassportModule,
     MailModule,
     FederationModule,
+    MicrobloggingModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -27,7 +30,7 @@ import { UserService } from '../user/user.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, InvitationController],
   providers: [AuthService, UserService, InvitationService, JwtStrategy],
   exports: [AuthService, InvitationService],
 })

@@ -12,6 +12,7 @@ import { randomBytes } from 'crypto';
 import { MailService } from '../mail/mail.service';
 import { ActorSyncService } from '../federation/services/actor-sync.service';
 import { UserService } from '../user/user.service';
+import { FollowService } from '../microblogging/services/follow.service';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +26,7 @@ export class AuthService {
     private mailService: MailService,
     private actorSyncService: ActorSyncService,
     private userService: UserService,
+    private followService: FollowService,
   ) {}
 
   async requestMagicLink(
@@ -104,14 +106,6 @@ export class AuthService {
         throw new BadRequestException('Username already exists');
       }
 
-      // If invitation code was used, validate and use it
-      if (magicLink.invitationCode) {
-        const invitation = await this.invitationService.validateInvitation(
-          magicLink.invitationCode,
-        );
-        await this.invitationService.useInvitation(invitation);
-      }
-
       // Create user
       user = this.userRepository.create({
         username,
@@ -125,6 +119,22 @@ export class AuthService {
 
       // Create corresponding Actor entity for new user
       await this.actorSyncService.syncUserToActor(user);
+
+      // If invitation code was used, validate and mark it as used with the new user
+      if (magicLink.invitationCode) {
+        const invitation = await this.invitationService.validateInvitation(
+          magicLink.invitationCode,
+        );
+        await this.invitationService.useInvitation(invitation, user);
+
+        // Create mutual follow between inviter and invitee
+        if (invitation.invitedBy) {
+          await this.followService.createMutualFollow(
+            invitation.invitedBy,
+            user,
+          );
+        }
+      }
     }
 
     // Mark magic link as used

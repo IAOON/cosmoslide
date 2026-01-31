@@ -40,7 +40,11 @@ function VerifyPage() {
       navigate({ to: '/dashboard' });
     } catch (error: unknown) {
       // Check if error indicates new user needs username
-      if (error instanceof Error && error.message?.includes('400')) {
+      if (
+        error instanceof Error &&
+        (error.message?.includes('Username is required') ||
+          error.message?.includes('username'))
+      ) {
         setNeedsUsername(true);
         setVerifying(false);
       } else {
@@ -57,9 +61,7 @@ function VerifyPage() {
 
     try {
       // For new users, send username with verification
-      const data = await authApi.verifyToken(
-        token! + '&username=' + username + '&displayName=' + displayName,
-      );
+      const data = await authApi.verifyToken(token!, username, displayName);
       localStorage.setItem('token', data.access_token);
       navigate({ to: '/dashboard' });
     } catch {

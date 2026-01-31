@@ -554,4 +554,69 @@ export class FollowService {
       last: offset >= total,
     };
   }
+
+  /**
+   * Create a mutual follow between two local users (both directions immediately accepted)
+   */
+  async createMutualFollow(user1: User, user2: User): Promise<void> {
+    // Get actors for both users
+    const actor1 = await this.actorRepository.findOne({
+      where: { userId: user1.id },
+    });
+    const actor2 = await this.actorRepository.findOne({
+      where: { userId: user2.id },
+    });
+
+    if (!actor1 || !actor2) {
+      return;
+    }
+
+    // Create follow from user1 -> user2
+    const follow1to2 = await this.followRepository.findOne({
+      where: { followerId: actor1.id, followingId: actor2.id },
+    });
+    if (!follow1to2) {
+      const newFollow = this.followRepository.create({
+        follower: actor1,
+        following: actor2,
+        status: 'accepted',
+        acceptedAt: new Date(),
+      });
+      await this.followRepository.save(newFollow);
+      await this.userRepository.increment(
+        { id: user2.id },
+        'followersCount',
+        1,
+      );
+      await this.userRepository.increment(
+        { id: user1.id },
+        'followingsCount',
+        1,
+      );
+    }
+
+    // Create follow from user2 -> user1
+    const follow2to1 = await this.followRepository.findOne({
+      where: { followerId: actor2.id, followingId: actor1.id },
+    });
+    if (!follow2to1) {
+      const newFollow = this.followRepository.create({
+        follower: actor2,
+        following: actor1,
+        status: 'accepted',
+        acceptedAt: new Date(),
+      });
+      await this.followRepository.save(newFollow);
+      await this.userRepository.increment(
+        { id: user1.id },
+        'followersCount',
+        1,
+      );
+      await this.userRepository.increment(
+        { id: user2.id },
+        'followingsCount',
+        1,
+      );
+    }
+  }
 }

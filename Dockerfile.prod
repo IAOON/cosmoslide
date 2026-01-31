@@ -41,8 +41,8 @@ WORKDIR /app
 COPY package*.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 COPY packages/backend/package.json ./packages/backend/
 
-# Install only production dependencies
-RUN pnpm install --prod --frozen-lockfile
+# Install only production dependencies (--ignore-scripts skips husky prepare hook)
+RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 
 # Copy built application from builder stage
 COPY --from=builder /app/packages/backend/dist ./packages/backend/dist

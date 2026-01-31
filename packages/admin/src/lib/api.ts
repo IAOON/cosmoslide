@@ -67,6 +67,7 @@ interface User {
   email: string;
   displayName: string;
   isAdmin: boolean;
+  invitationQuota: number;
   createdAt: string;
   actor?: {
     id: string;
@@ -291,6 +292,34 @@ export const adminAPI = {
       return Ok(response.data);
     } catch (error) {
       return Err(parseAxiosError(error));
+    }
+  },
+
+  updateUserQuota: async (
+    userId: string,
+    quota: number,
+  ): Promise<Result<User, NetworkError | NotFoundError>> => {
+    try {
+      const response = await api.patch(`/admin/users/${userId}/quota`, {
+        quota,
+      });
+      return Ok(response.data);
+    } catch (error) {
+      return Err(parseAxiosError(error) as NetworkError | NotFoundError);
+    }
+  },
+
+  addUserQuota: async (
+    userId: string,
+    amount: number,
+  ): Promise<Result<User, NetworkError | NotFoundError>> => {
+    try {
+      const response = await api.post(`/admin/users/${userId}/quota/add`, {
+        amount,
+      });
+      return Ok(response.data);
+    } catch (error) {
+      return Err(parseAxiosError(error) as NetworkError | NotFoundError);
     }
   },
 };

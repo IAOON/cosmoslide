@@ -50,6 +50,9 @@ export class User {
   @Column({ default: false })
   isAdmin: boolean;
 
+  @Column({ default: 0 })
+  invitationQuota: number;
+
   @Column({
     type: 'enum',
     enum: PostVisibility,

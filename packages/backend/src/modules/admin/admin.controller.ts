@@ -65,6 +65,24 @@ export class AdminController {
     return await this.adminService.toggleAdminStatus(id, isAdmin);
   }
 
+  // Set user invitation quota
+  @Patch('users/:id/quota')
+  async updateUserQuota(
+    @Param('id') id: string,
+    @Body('quota', ParseIntPipe) quota: number,
+  ) {
+    return await this.adminService.updateUserQuota(id, quota);
+  }
+
+  // Add to user invitation quota
+  @Post('users/:id/quota/add')
+  async addUserQuota(
+    @Param('id') id: string,
+    @Body('amount', ParseIntPipe) amount: number,
+  ) {
+    return await this.adminService.addUserQuota(id, amount);
+  }
+
   // Get all actors with pagination
   @Get('actors')
   async getAllActors(

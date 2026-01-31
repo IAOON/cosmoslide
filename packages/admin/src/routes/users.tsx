@@ -22,6 +22,7 @@ function UsersPage() {
   const [showModal, setShowModal] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [quotaInputs, setQuotaInputs] = useState<Record<string, string>>({});
 
   useEffect(() => {
     fetchUsers();
@@ -61,6 +62,29 @@ function UsersPage() {
       }
       return;
     }
+    fetchUsers();
+  };
+
+  const addQuota = async (userId: string) => {
+    const amount = parseInt(quotaInputs[userId] || '0', 10);
+    if (isNaN(amount) || amount <= 0) {
+      alert('Please enter a positive number');
+      return;
+    }
+
+    const result = await adminAPI.addUserQuota(userId, amount);
+    if (!result.ok) {
+      switch (result.error.type) {
+        case 'NOT_FOUND':
+          alert('User not found');
+          break;
+        case 'NETWORK':
+          alert(`Failed to add quota: ${result.error.message}`);
+          break;
+      }
+      return;
+    }
+    setQuotaInputs((prev) => ({ ...prev, [userId]: '' }));
     fetchUsers();
   };
 
@@ -109,7 +133,7 @@ function UsersPage() {
           style={{
             width: '100%',
             borderCollapse: 'collapse',
-            minWidth: '1000px',
+            minWidth: '1200px',
           }}
         >
           <thead style={{ background: '#f9fafb' }}>
@@ -192,6 +216,16 @@ function UsersPage() {
                   whiteSpace: 'nowrap',
                 }}
               >
+                Quota
+              </th>
+              <th
+                style={{
+                  padding: '0.75rem',
+                  textAlign: 'left',
+                  fontWeight: '600',
+                  whiteSpace: 'nowrap',
+                }}
+              >
                 Created
               </th>
               <th
@@ -261,6 +295,64 @@ function UsersPage() {
                 </td>
                 <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                   {user.isAdmin ? '✅' : '❌'}
+                </td>
+                <td style={{ padding: '0.75rem' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                    }}
+                  >
+                    <span
+                      style={{
+                        padding: '0.25rem 0.5rem',
+                        background:
+                          user.invitationQuota > 0 ? '#d4edda' : '#f8f9fa',
+                        color: user.invitationQuota > 0 ? '#155724' : '#6c757d',
+                        borderRadius: '4px',
+                        fontSize: '0.875rem',
+                        fontWeight: '600',
+                        minWidth: '30px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {user.invitationQuota}
+                    </span>
+                    <input
+                      type="number"
+                      min="1"
+                      placeholder="+5"
+                      value={quotaInputs[user.id] || ''}
+                      onChange={(e) =>
+                        setQuotaInputs((prev) => ({
+                          ...prev,
+                          [user.id]: e.target.value,
+                        }))
+                      }
+                      style={{
+                        width: '50px',
+                        padding: '0.25rem',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        fontSize: '0.875rem',
+                      }}
+                    />
+                    <button
+                      onClick={() => addQuota(user.id)}
+                      style={{
+                        padding: '0.25rem 0.5rem',
+                        background: '#28a745',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        fontSize: '0.75rem',
+                      }}
+                    >
+                      Add
+                    </button>
+                  </div>
                 </td>
                 <td
                   style={{

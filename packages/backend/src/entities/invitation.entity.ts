@@ -38,6 +38,16 @@ export class Invitation {
   @Column({ nullable: true })
   note: string;
 
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'usedById' })
+  usedBy: User;
+
+  @Column({ nullable: true })
+  usedById: string;
+
+  @Column({ nullable: true })
+  usedAt: Date;
+
   @CreateDateColumn()
   createdAt: Date;
 

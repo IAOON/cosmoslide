@@ -162,6 +162,46 @@ export class AdminService {
     return user;
   }
 
+  // Set user invitation quota to absolute value
+  async updateUserQuota(userId: string, quota: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (quota < 0) {
+      throw new BadRequestException('Quota cannot be negative');
+    }
+
+    user.invitationQuota = quota;
+    await this.userRepository.save(user);
+
+    return user;
+  }
+
+  // Add to user's existing invitation quota
+  async addUserQuota(userId: string, amount: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (amount < 0) {
+      throw new BadRequestException('Amount cannot be negative');
+    }
+
+    user.invitationQuota += amount;
+    await this.userRepository.save(user);
+
+    return user;
+  }
+
   // Grant admin role to user by email
   async grantAdminByEmail(email: string) {
     const user = await this.userRepository.findOne({

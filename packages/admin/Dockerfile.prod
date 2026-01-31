@@ -1,5 +1,5 @@
 # Multi-stage build for admin panel (TanStack Start + Nitro)
-FROM node:22-slim AS builder
+FROM node:22-slim AS deps
 
 WORKDIR /app
 
@@ -15,8 +15,18 @@ RUN yarn install --frozen-lockfile
 # Fix Rollup native bindings - yarn 1.x doesn't handle platform-specific optional deps correctly
 RUN yarn add @rollup/rollup-linux-arm64-gnu --ignore-workspace-root-check
 
-# Copy source code
+# Builder stage
+FROM node:22-slim AS builder
+
+WORKDIR /app
+
+# Copy source files and package configs
+COPY package.json yarn.lock ./
 COPY packages/admin ./packages/admin
+
+# Copy dependencies from deps stage (after source to avoid overwrite)
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages/admin/node_modules ./packages/admin/node_modules
 
 # Build arguments for environment variables
 ARG VITE_API_URL

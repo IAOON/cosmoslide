@@ -16,8 +16,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "types": ["vinxi/types/client"]
+    "noUncheckedIndexedAccess": true
   },
   "include": ["src"]
 }

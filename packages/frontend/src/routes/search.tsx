@@ -6,6 +6,7 @@ import UserCard from '@/components/UserCard';
 import NoteCard from '@/components/NoteCard';
 import NavigationHeader from '@/components/NavigationHeader';
 import { searchApi } from '@/lib/api';
+import type { Note } from '@/lib/types';
 
 const searchSchema = z.object({
   q: z.string().optional(),
@@ -33,7 +34,7 @@ function SearchPage() {
   const [query, setQuery] = useState(initialQuery || '');
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState<Array<Record<string, unknown>>>([]);
-  const [notes, setNotes] = useState<Array<Record<string, unknown>>>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [activeTab, setActiveTab] = useState<SearchTab>('all');
 
   useEffect(() => {
@@ -340,7 +341,7 @@ function SearchPage() {
                             <div className="space-y-4">
                               {filteredNotes.map((note) => (
                                 <NoteCard
-                                  key={String(note.id)}
+                                  key={note.id}
                                   note={note}
                                   currentUserId={currentUser?.id}
                                 />

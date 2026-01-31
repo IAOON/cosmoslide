@@ -2,45 +2,45 @@ import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { notesApi } from '@/lib/api';
 
-interface ActorProps {
-  userId: string;
-  displayName: string;
-  username: string;
-  preferredUsername: string;
+// Extended Actor type that includes optional fields that may come from API
+interface NoteAuthor {
+  id?: string;
+  userId?: string | null;
+  username?: string;
+  displayName?: string;
+  preferredUsername?: string;
   name?: string;
-  acct: string;
-  icon: {
-    url: string;
-    mediaType: string;
+  acct?: string;
+  icon?: {
+    url?: string;
+    mediaType?: string;
   };
   manuallyApprovesFollowers?: boolean;
 }
 
-interface NoteCardProps {
-  note: {
+interface NoteData {
+  id: string;
+  content: string;
+  contentWarning?: string;
+  visibility: string;
+  createdAt: string;
+  author?: NoteAuthor;
+}
+
+interface NoteCardNote extends NoteData {
+  isShared?: boolean;
+  sharedBy?: {
     id: string;
-    content: string;
-    contentWarning?: string;
-    visibility: string;
-    createdAt: string;
-    isShared?: boolean;
-    sharedBy?: {
-      id: string;
-      username: string;
-      displayName?: string;
-      preferredUsername?: string;
-      name?: string;
-    };
-    sharedNote?: {
-      id: string;
-      content: string;
-      contentWarning?: string;
-      visibility: string;
-      createdAt: string;
-      author?: ActorProps;
-    };
-    author?: ActorProps;
+    username?: string;
+    displayName?: string;
+    preferredUsername?: string;
+    name?: string;
   };
+  sharedNote?: NoteData;
+}
+
+interface NoteCardProps {
+  note: NoteCardNote;
   currentUserId?: string;
   onDelete?: (noteId: string) => void;
 }

@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import { authAPI } from '../lib/api';
 
 export const Route = createFileRoute('/login')({
-  validateSearch: (search: Record<string, unknown>) => ({
-    token: (search.token as string) || undefined,
+  validateSearch: (search: Record<string, unknown>): { token?: string } => ({
+    token: search.token ? String(search.token) : undefined,
   }),
   component: LoginPage,
 });

@@ -35,7 +35,8 @@ function PublicTimelinePage() {
 
   const { data } = useSuspenseQuery(publicTimelineQueryOptions(limit, 0));
 
-  const notes = allNotes.length > 0 ? allNotes : data?.notes || [];
+  const notes: Note[] =
+    allNotes.length > 0 ? allNotes : (data?.notes as Note[]) || [];
   const hasMore = (data?.notes?.length || 0) === limit;
 
   const handleLoadMore = async () => {

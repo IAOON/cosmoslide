@@ -14,7 +14,21 @@ function NoteDetailPage() {
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
 
-  const [note, setNote] = useState<Record<string, unknown> | null>(null);
+  const [note, setNote] = useState<{
+    id: string;
+    content: string;
+    contentWarning?: string;
+    visibility: string;
+    createdAt: string;
+    author?: {
+      id?: string;
+      username?: string;
+      preferredUsername?: string;
+      displayName?: string;
+      name?: string;
+      icon?: { url?: string };
+    };
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -96,16 +110,7 @@ function NoteDetailPage() {
     );
   }
 
-  const author = note.author as
-    | {
-        id?: string;
-        username?: string;
-        preferredUsername?: string;
-        displayName?: string;
-        name?: string;
-        icon?: { url?: string };
-      }
-    | undefined;
+  const author = note.author;
   const authorUsername =
     author?.username || author?.preferredUsername || 'unknown';
   const authorDisplayName =
@@ -173,7 +178,7 @@ function NoteDetailPage() {
             {note.contentWarning && (
               <div className="mb-4 p-3 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg">
                 <p className="font-medium text-yellow-800 dark:text-yellow-200">
-                  ⚠️ Content Warning: {note.contentWarning as string}
+                  ⚠️ Content Warning: {note.contentWarning}
                 </p>
               </div>
             )}
@@ -181,19 +186,19 @@ function NoteDetailPage() {
             <div className="mb-6">
               <p
                 className="text-lg text-gray-900 dark:text-white whitespace-pre-wrap break-words"
-                dangerouslySetInnerHTML={{ __html: note.content as string }}
+                dangerouslySetInnerHTML={{ __html: note.content }}
               ></p>
             </div>
 
             <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4">
-              <time title={formatDate(note.createdAt as string)}>
-                {formatDate(note.createdAt as string)}
+              <time title={formatDate(note.createdAt)}>
+                {formatDate(note.createdAt)}
               </time>
               <span className="flex items-center space-x-1">
-                <span title={note.visibility as string}>
-                  {visibilityIcon[note.visibility as string] || ''}
+                <span title={note.visibility}>
+                  {visibilityIcon[note.visibility] || ''}
                 </span>
-                <span className="capitalize">{note.visibility as string}</span>
+                <span className="capitalize">{note.visibility}</span>
               </span>
             </div>
 

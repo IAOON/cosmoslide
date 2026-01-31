@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import NoteCard from '@/components/NoteCard';
 import { userApi } from '@/lib/api';
+import type { Note } from '@/lib/types';
 
 interface TimelineProps {
   username: string;
@@ -8,9 +9,7 @@ interface TimelineProps {
 }
 
 export default function Timeline({ username, currentUserId }: TimelineProps) {
-  const [notes, setNotes] = useState<
-    Array<{ id: string; [key: string]: unknown }>
-  >([]);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);

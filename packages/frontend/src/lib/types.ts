@@ -6,10 +6,12 @@ export interface Actor {
   iri?: string;
   acct?: string;
   preferredUsername: string;
+  username?: string;
   name?: string;
+  displayName?: string;
   summary?: string;
   url?: string;
-  icon?: { type: string; mediaType?: string; url: string };
+  icon?: { type?: string; mediaType?: string; url: string };
   image?: { type: string; mediaType?: string; url: string };
   inboxUrl?: string;
   outboxUrl?: string;
@@ -59,6 +61,7 @@ export interface NoteAttachment {
 export interface Note {
   id: string;
   content: string;
+  contentWarning?: string;
   source?: string;
   mediaType?: string;
   visibility: NoteVisibility;

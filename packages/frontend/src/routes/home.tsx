@@ -11,7 +11,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import NoteComposer from '@/components/NoteComposer';
 import NoteCard from '@/components/NoteCard';
 import AppLayout from '@/components/AppLayout';
-import TimelineTabs from '@/components/TimelineTabs';
 import type { Note } from '@/lib/types';
 
 export const Route = createFileRoute('/home')({
@@ -128,9 +127,6 @@ function HomePage() {
               )}
             </div>
           </div>
-
-          {/* Navigation Tabs */}
-          <TimelineTabs activeTab="home" />
         </div>
 
         {/* Note Composer */}

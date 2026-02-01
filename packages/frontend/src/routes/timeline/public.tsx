@@ -1,14 +1,9 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
-import {
-  useSuspenseQuery,
-  useQueryClient,
-  queryOptions,
-} from '@tanstack/react-query';
+import { useSuspenseQuery, queryOptions } from '@tanstack/react-query';
 import { notesApi } from '@/lib/api';
 import NoteCard from '@/components/NoteCard';
 import AppLayout from '@/components/AppLayout';
-import TimelineTabs from '@/components/TimelineTabs';
 import type { Note } from '@/lib/types';
 
 const publicTimelineQueryOptions = (limit: number, offset: number) =>
@@ -27,7 +22,6 @@ export const Route = createFileRoute('/timeline/public')({
 });
 
 function PublicTimelinePage() {
-  const queryClient = useQueryClient();
   const [offset, setOffset] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [allNotes, setAllNotes] = useState<Note[]>([]);
@@ -59,12 +53,9 @@ function PublicTimelinePage() {
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             Public Timeline
           </h1>
-
-          {/* Navigation Tabs */}
-          <TimelineTabs activeTab="public" />
         </div>
 
         {/* Timeline */}

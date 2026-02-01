@@ -9,7 +9,7 @@ import ProfileTabs from '@/components/ProfileTabs';
 import AppLayout from '@/components/AppLayout';
 import type { User } from '@/lib/types';
 
-export const Route = createFileRoute('/$username')({
+export const Route = createFileRoute('/$username/')({
   component: UserProfile,
 });
 
@@ -137,63 +137,57 @@ function UserProfile() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
-  if (error || !user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">{error || 'User not found'}</p>
-          <Link to="/" className="text-blue-600 hover:text-blue-500">
-            Back to home
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   const isOwnProfile = !isRemoteUser && currentUser?.username === username;
 
   return (
     <AppLayout>
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <ProfileHeader
-          user={user}
-          currentUser={currentUser}
-          followStatus={followStatus}
-          followLoading={followLoading}
-          onFollow={handleFollow}
-          username={username}
-          isRemoteUser={isRemoteUser}
-          fullHandle={fullHandle}
-        />
-
-        <div className="mt-6">
-          <ProfileTabs username={username} />
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
-
-        {isOwnProfile && (
-          <div className="mt-6">
-            <NoteComposer onNoteCreated={() => window.location.reload()} />
+      ) : error || !user ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-red-600 mb-4">{error || 'User not found'}</p>
+            <Link to="/" className="text-blue-600 hover:text-blue-500">
+              Back to home
+            </Link>
           </div>
-        )}
-
-        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Notes
-          </h2>
-          <Timeline
-            username={isRemoteUser ? fullHandle : username}
-            currentUserId={currentUser?.id}
-          />
         </div>
-      </div>
+      ) : (
+        <div className="max-w-2xl mx-auto px-4 py-8">
+          <ProfileHeader
+            user={user}
+            currentUser={currentUser}
+            followStatus={followStatus}
+            followLoading={followLoading}
+            onFollow={handleFollow}
+            username={username}
+            isRemoteUser={isRemoteUser}
+            fullHandle={fullHandle}
+          />
+
+          <div className="mt-6">
+            <ProfileTabs username={username} />
+          </div>
+
+          {isOwnProfile && (
+            <div className="mt-6">
+              <NoteComposer onNoteCreated={() => window.location.reload()} />
+            </div>
+          )}
+
+          <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              Notes
+            </h2>
+            <Timeline
+              username={isRemoteUser ? fullHandle : username}
+              currentUserId={currentUser?.id}
+            />
+          </div>
+        </div>
+      )}
     </AppLayout>
   );
 }

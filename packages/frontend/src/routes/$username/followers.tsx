@@ -63,81 +63,75 @@ function FollowersPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
-          <Link
-            to="/$username"
-            params={{ username: `@${username}` }}
-            className="text-blue-600 hover:text-blue-500"
-          >
-            Back to profile
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <AppLayout>
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <Link
-            to="/$username"
-            params={{ username: `@${username}` }}
-            className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
-          >
-            ← Back to @{username}
-          </Link>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Followers
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            People following @{username}
-          </p>
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
-
-        <div className="space-y-2">
-          {followers.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
-              <p className="text-gray-500 dark:text-gray-400">
-                No followers yet
-              </p>
-            </div>
-          ) : (
-            <>
-              {followers.map((follower: unknown, index) => (
-                <UserCard
-                  key={`${(follower as { username?: string }).username}-${index}`}
-                  user={follower as { username?: string }}
-                />
-              ))}
-
-              {hasMore && (
-                <div className="pt-4 flex justify-center">
-                  <button
-                    onClick={handleLoadMore}
-                    disabled={loadingMore}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
-                    {loadingMore ? 'Loading...' : 'Load More'}
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+      ) : error ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-red-600 mb-4">{error}</p>
+            <Link
+              to="/$username"
+              params={{ username: `@${username}` }}
+              className="text-blue-600 hover:text-blue-500"
+            >
+              Back to profile
+            </Link>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="max-w-2xl mx-auto px-4 py-8">
+          <div className="mb-6">
+            <Link
+              to="/$username"
+              params={{ username: `@${username}` }}
+              className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
+            >
+              ← Back to @{username}
+            </Link>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Followers
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">
+              People following @{username}
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            {followers.length === 0 ? (
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
+                <p className="text-gray-500 dark:text-gray-400">
+                  No followers yet
+                </p>
+              </div>
+            ) : (
+              <>
+                {followers.map((follower: unknown, index) => (
+                  <UserCard
+                    key={`${(follower as { username?: string }).username}-${index}`}
+                    user={follower as { username?: string }}
+                  />
+                ))}
+
+                {hasMore && (
+                  <div className="pt-4 flex justify-center">
+                    <button
+                      onClick={handleLoadMore}
+                      disabled={loadingMore}
+                      className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {loadingMore ? 'Loading...' : 'Load More'}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </AppLayout>
   );
 }

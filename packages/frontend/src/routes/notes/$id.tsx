@@ -185,10 +185,10 @@ function NoteDetailPage() {
             )}
 
             <div className="mb-6">
-              <p
-                className="text-lg text-gray-900 dark:text-white whitespace-pre-wrap break-words"
+              <div
+                className="note-content text-lg text-gray-900 dark:text-white whitespace-pre-wrap break-words"
                 dangerouslySetInnerHTML={{ __html: note.content }}
-              ></p>
+              />
             </div>
 
             <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4">

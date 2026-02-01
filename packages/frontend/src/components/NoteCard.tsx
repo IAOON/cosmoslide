@@ -229,10 +229,10 @@ export default function NoteCard({
               params={{ id: displayNote.id }}
               className="block mt-2 hover:opacity-90"
             >
-              <p
-                className="text-gray-900 dark:text-white whitespace-pre-wrap break-words"
+              <div
+                className="note-content text-gray-900 dark:text-white whitespace-pre-wrap break-words"
                 dangerouslySetInnerHTML={{ __html: displayNote.content }}
-              ></p>
+              />
             </Link>
           )}
 

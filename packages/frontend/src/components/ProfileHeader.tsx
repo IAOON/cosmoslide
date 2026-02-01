@@ -184,7 +184,10 @@ export default function ProfileHeader({
         </div>
 
         {user.bio && (
-          <p className="text-gray-700 dark:text-gray-300 mb-4">{user.bio}</p>
+          <div
+            className="note-content text-gray-700 dark:text-gray-300 mb-4"
+            dangerouslySetInnerHTML={{ __html: user.bio }}
+          />
         )}
 
         <div className="flex gap-6 text-sm">

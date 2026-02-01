@@ -38,6 +38,28 @@ export class MicrobloggingController {
     private readonly timelineService: TimelineService,
   ) {}
 
+  // Public endpoint for looking up actors by handle (for viewing remote profiles without auth)
+  @Get('actors/lookup')
+  async lookupActor(@Query('handle') handle: string) {
+    const result = await this.searchService.search(handle);
+
+    if (result.type === 'actor') {
+      const user = result.data;
+      return {
+        id: user.id,
+        username: user.preferredUsername || '',
+        displayName: user.name || '',
+        bio: user.summary || '',
+        acct: user.acct || '',
+        url: user.url || '',
+        icon: user.icon || null,
+        manuallyApprovesFollowers: user.manuallyApprovesFollowers || false,
+      };
+    }
+
+    throw new NotFoundException('Actor not found');
+  }
+
   @Get('search')
   @UseGuards(JwtAuthGuard)
   async search(@Query('q') query: string) {

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { userApi, searchApi } from '@/lib/api';
+import { userApi, actorApi } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
 import NoteComposer from '@/components/NoteComposer';
 import Timeline from '@/components/Timeline';
@@ -59,25 +59,20 @@ function UserProfile() {
   const fetchUserProfile = async () => {
     try {
       if (isRemoteUser) {
-        const searchResult = await searchApi.search(fullHandle);
-        if (searchResult.users?.length > 0) {
-          const remoteUser = searchResult.users[0];
-          setUser({
-            ...remoteUser,
-            username: remoteUser.preferredUsername || remoteUser.username,
-            displayName: remoteUser.name || remoteUser.displayName,
-            bio: remoteUser.summary || remoteUser.bio,
-            isRemote: true,
-            domain,
-          });
-        } else {
-          setError('User not found');
-        }
+        const remoteUser = await actorApi.lookup(fullHandle);
+        setUser({
+          ...remoteUser,
+          username: remoteUser.preferredUsername || remoteUser.username,
+          displayName: remoteUser.name || remoteUser.displayName,
+          bio: remoteUser.summary || remoteUser.bio,
+          isRemote: true,
+          domain,
+        });
       } else {
         const userData = await userApi.getProfile(username);
         setUser(userData);
       }
-    } catch (error) {
+    } catch {
       setError('Failed to load user profile');
     } finally {
       setLoading(false);

@@ -121,14 +121,14 @@ const UsernamePresentationsRoute = UsernamePresentationsRouteImport.update({
   getParentRoute: () => UsernameRoute,
 } as any);
 const UsernameFollowingRoute = UsernameFollowingRouteImport.update({
-  id: '/following',
-  path: '/following',
-  getParentRoute: () => UsernameRoute,
+  id: '/$username/following',
+  path: '/$username/following',
+  getParentRoute: () => rootRouteImport,
 } as any);
 const UsernameFollowersRoute = UsernameFollowersRouteImport.update({
-  id: '/followers',
-  path: '/followers',
-  getParentRoute: () => UsernameRoute,
+  id: '/$username/followers',
+  path: '/$username/followers',
+  getParentRoute: () => rootRouteImport,
 } as any);
 
 export interface FileRoutesByFullPath {
@@ -276,6 +276,8 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute;
   SettingsRoute: typeof SettingsRoute;
   UploadRoute: typeof UploadRoute;
+  UsernameFollowersRoute: typeof UsernameFollowersRoute;
+  UsernameFollowingRoute: typeof UsernameFollowingRoute;
   AuthSigninRoute: typeof AuthSigninRoute;
   AuthSignupRoute: typeof AuthSignupRoute;
   AuthVerifyRoute: typeof AuthVerifyRoute;
@@ -417,17 +419,17 @@ declare module '@tanstack/react-router' {
     };
     '/$username/following': {
       id: '/$username/following';
-      path: '/following';
+      path: '/$username/following';
       fullPath: '/$username/following';
       preLoaderRoute: typeof UsernameFollowingRouteImport;
-      parentRoute: typeof UsernameRoute;
+      parentRoute: typeof rootRouteImport;
     };
     '/$username/followers': {
       id: '/$username/followers';
-      path: '/followers';
+      path: '/$username/followers';
       fullPath: '/$username/followers';
       preLoaderRoute: typeof UsernameFollowersRouteImport;
-      parentRoute: typeof UsernameRoute;
+      parentRoute: typeof rootRouteImport;
     };
   }
 }
@@ -441,6 +443,8 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
   UploadRoute: UploadRoute,
+  UsernameFollowersRoute: UsernameFollowersRoute,
+  UsernameFollowingRoute: UsernameFollowingRoute,
   AuthSigninRoute: AuthSigninRoute,
   AuthSignupRoute: AuthSignupRoute,
   AuthVerifyRoute: AuthVerifyRoute,

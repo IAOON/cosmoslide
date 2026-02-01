@@ -147,6 +147,13 @@ export const searchApi = {
   },
 };
 
+export const actorApi = {
+  // Public endpoint - no auth required
+  lookup: async (handle: string) => {
+    return fetchAPI(`/actors/lookup?handle=${encodeURIComponent(handle)}`);
+  },
+};
+
 export const followRequestApi = {
   getFollowRequests: async (username: string) =>
     fetchAPI(`/users/${username}/follow-requests`),

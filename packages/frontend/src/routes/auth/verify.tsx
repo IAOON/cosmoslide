@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 import { authApi } from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 import { z } from 'zod';
 
 const verifySearchSchema = z.object({
@@ -20,6 +21,7 @@ function VerifyPage() {
   const [needsUsername, setNeedsUsername] = useState(false);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
   const { token } = Route.useSearch();
 
   useEffect(() => {
@@ -37,7 +39,8 @@ function VerifyPage() {
     try {
       const data = await authApi.verifyToken(token!);
       localStorage.setItem('token', data.access_token);
-      navigate({ to: '/dashboard' });
+      await refreshUser();
+      navigate({ to: '/home' });
     } catch (error: unknown) {
       // Check if error indicates new user needs username
       if (
@@ -63,7 +66,8 @@ function VerifyPage() {
       // For new users, send username with verification
       const data = await authApi.verifyToken(token!, username, displayName);
       localStorage.setItem('token', data.access_token);
-      navigate({ to: '/dashboard' });
+      await refreshUser();
+      navigate({ to: '/home' });
     } catch {
       setMessage('Failed to complete account setup');
     } finally {

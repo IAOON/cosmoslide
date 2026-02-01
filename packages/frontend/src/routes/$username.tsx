@@ -6,6 +6,7 @@ import NoteComposer from '@/components/NoteComposer';
 import Timeline from '@/components/Timeline';
 import ProfileHeader from '@/components/ProfileHeader';
 import ProfileTabs from '@/components/ProfileTabs';
+import AppLayout from '@/components/AppLayout';
 import type { User } from '@/lib/types';
 
 export const Route = createFileRoute('/$username')({
@@ -160,7 +161,7 @@ function UserProfile() {
   const isOwnProfile = !isRemoteUser && currentUser?.username === username;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div className="max-w-2xl mx-auto px-4 py-8">
         <ProfileHeader
           user={user}
@@ -193,6 +194,6 @@ function UserProfile() {
           />
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

@@ -8,198 +8,198 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as UploadRouteImport } from './routes/upload';
-import { Route as SettingsRouteImport } from './routes/settings';
-import { Route as SearchRouteImport } from './routes/search';
-import { Route as InvitationsRouteImport } from './routes/invitations';
-import { Route as HomeRouteImport } from './routes/home';
-import { Route as FollowRequestsRouteImport } from './routes/follow-requests';
-import { Route as DashboardRouteImport } from './routes/dashboard';
-import { Route as UsernameRouteImport } from './routes/$username';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as PresentationsIndexRouteImport } from './routes/presentations/index';
-import { Route as TimelinePublicRouteImport } from './routes/timeline/public';
-import { Route as PresentationsNewRouteImport } from './routes/presentations/new';
-import { Route as PresentationsIdRouteImport } from './routes/presentations/$id';
-import { Route as NotesIdRouteImport } from './routes/notes/$id';
-import { Route as AuthVerifyRouteImport } from './routes/auth/verify';
-import { Route as AuthSignupRouteImport } from './routes/auth/signup';
-import { Route as AuthSigninRouteImport } from './routes/auth/signin';
-import { Route as UsernamePresentationsRouteImport } from './routes/$username/presentations';
-import { Route as UsernameFollowingRouteImport } from './routes/$username/following';
-import { Route as UsernameFollowersRouteImport } from './routes/$username/followers';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as UploadRouteImport } from './routes/upload'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as InvitationsRouteImport } from './routes/invitations'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as FollowRequestsRouteImport } from './routes/follow-requests'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as UsernameRouteImport } from './routes/$username'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as PresentationsIndexRouteImport } from './routes/presentations/index'
+import { Route as TimelinePublicRouteImport } from './routes/timeline/public'
+import { Route as PresentationsNewRouteImport } from './routes/presentations/new'
+import { Route as PresentationsIdRouteImport } from './routes/presentations/$id'
+import { Route as NotesIdRouteImport } from './routes/notes/$id'
+import { Route as AuthVerifyRouteImport } from './routes/auth/verify'
+import { Route as AuthSignupRouteImport } from './routes/auth/signup'
+import { Route as AuthSigninRouteImport } from './routes/auth/signin'
+import { Route as UsernamePresentationsRouteImport } from './routes/$username/presentations'
+import { Route as UsernameFollowingRouteImport } from './routes/$username/following'
+import { Route as UsernameFollowersRouteImport } from './routes/$username/followers'
 
 const UploadRoute = UploadRouteImport.update({
   id: '/upload',
   path: '/upload',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const InvitationsRoute = InvitationsRouteImport.update({
   id: '/invitations',
   path: '/invitations',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const FollowRequestsRoute = FollowRequestsRouteImport.update({
   id: '/follow-requests',
   path: '/follow-requests',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const UsernameRoute = UsernameRouteImport.update({
   id: '/$username',
   path: '/$username',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const PresentationsIndexRoute = PresentationsIndexRouteImport.update({
   id: '/presentations/',
   path: '/presentations/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const TimelinePublicRoute = TimelinePublicRouteImport.update({
   id: '/timeline/public',
   path: '/timeline/public',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const PresentationsNewRoute = PresentationsNewRouteImport.update({
   id: '/presentations/new',
   path: '/presentations/new',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const PresentationsIdRoute = PresentationsIdRouteImport.update({
   id: '/presentations/$id',
   path: '/presentations/$id',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const NotesIdRoute = NotesIdRouteImport.update({
   id: '/notes/$id',
   path: '/notes/$id',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AuthVerifyRoute = AuthVerifyRouteImport.update({
   id: '/auth/verify',
   path: '/auth/verify',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AuthSignupRoute = AuthSignupRouteImport.update({
   id: '/auth/signup',
   path: '/auth/signup',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AuthSigninRoute = AuthSigninRouteImport.update({
   id: '/auth/signin',
   path: '/auth/signin',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const UsernamePresentationsRoute = UsernamePresentationsRouteImport.update({
   id: '/presentations',
   path: '/presentations',
   getParentRoute: () => UsernameRoute,
-} as any);
+} as any)
 const UsernameFollowingRoute = UsernameFollowingRouteImport.update({
   id: '/following',
   path: '/following',
   getParentRoute: () => UsernameRoute,
-} as any);
+} as any)
 const UsernameFollowersRoute = UsernameFollowersRouteImport.update({
   id: '/followers',
   path: '/followers',
   getParentRoute: () => UsernameRoute,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/$username': typeof UsernameRouteWithChildren;
-  '/dashboard': typeof DashboardRoute;
-  '/follow-requests': typeof FollowRequestsRoute;
-  '/home': typeof HomeRoute;
-  '/invitations': typeof InvitationsRoute;
-  '/search': typeof SearchRoute;
-  '/settings': typeof SettingsRoute;
-  '/upload': typeof UploadRoute;
-  '/$username/followers': typeof UsernameFollowersRoute;
-  '/$username/following': typeof UsernameFollowingRoute;
-  '/$username/presentations': typeof UsernamePresentationsRoute;
-  '/auth/signin': typeof AuthSigninRoute;
-  '/auth/signup': typeof AuthSignupRoute;
-  '/auth/verify': typeof AuthVerifyRoute;
-  '/notes/$id': typeof NotesIdRoute;
-  '/presentations/$id': typeof PresentationsIdRoute;
-  '/presentations/new': typeof PresentationsNewRoute;
-  '/timeline/public': typeof TimelinePublicRoute;
-  '/presentations/': typeof PresentationsIndexRoute;
+  '/': typeof IndexRoute
+  '/$username': typeof UsernameRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/follow-requests': typeof FollowRequestsRoute
+  '/home': typeof HomeRoute
+  '/invitations': typeof InvitationsRoute
+  '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
+  '/upload': typeof UploadRoute
+  '/$username/followers': typeof UsernameFollowersRoute
+  '/$username/following': typeof UsernameFollowingRoute
+  '/$username/presentations': typeof UsernamePresentationsRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/auth/verify': typeof AuthVerifyRoute
+  '/notes/$id': typeof NotesIdRoute
+  '/presentations/$id': typeof PresentationsIdRoute
+  '/presentations/new': typeof PresentationsNewRoute
+  '/timeline/public': typeof TimelinePublicRoute
+  '/presentations/': typeof PresentationsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/$username': typeof UsernameRouteWithChildren;
-  '/dashboard': typeof DashboardRoute;
-  '/follow-requests': typeof FollowRequestsRoute;
-  '/home': typeof HomeRoute;
-  '/invitations': typeof InvitationsRoute;
-  '/search': typeof SearchRoute;
-  '/settings': typeof SettingsRoute;
-  '/upload': typeof UploadRoute;
-  '/$username/followers': typeof UsernameFollowersRoute;
-  '/$username/following': typeof UsernameFollowingRoute;
-  '/$username/presentations': typeof UsernamePresentationsRoute;
-  '/auth/signin': typeof AuthSigninRoute;
-  '/auth/signup': typeof AuthSignupRoute;
-  '/auth/verify': typeof AuthVerifyRoute;
-  '/notes/$id': typeof NotesIdRoute;
-  '/presentations/$id': typeof PresentationsIdRoute;
-  '/presentations/new': typeof PresentationsNewRoute;
-  '/timeline/public': typeof TimelinePublicRoute;
-  '/presentations': typeof PresentationsIndexRoute;
+  '/': typeof IndexRoute
+  '/$username': typeof UsernameRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/follow-requests': typeof FollowRequestsRoute
+  '/home': typeof HomeRoute
+  '/invitations': typeof InvitationsRoute
+  '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
+  '/upload': typeof UploadRoute
+  '/$username/followers': typeof UsernameFollowersRoute
+  '/$username/following': typeof UsernameFollowingRoute
+  '/$username/presentations': typeof UsernamePresentationsRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/auth/verify': typeof AuthVerifyRoute
+  '/notes/$id': typeof NotesIdRoute
+  '/presentations/$id': typeof PresentationsIdRoute
+  '/presentations/new': typeof PresentationsNewRoute
+  '/timeline/public': typeof TimelinePublicRoute
+  '/presentations': typeof PresentationsIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  '/': typeof IndexRoute;
-  '/$username': typeof UsernameRouteWithChildren;
-  '/dashboard': typeof DashboardRoute;
-  '/follow-requests': typeof FollowRequestsRoute;
-  '/home': typeof HomeRoute;
-  '/invitations': typeof InvitationsRoute;
-  '/search': typeof SearchRoute;
-  '/settings': typeof SettingsRoute;
-  '/upload': typeof UploadRoute;
-  '/$username/followers': typeof UsernameFollowersRoute;
-  '/$username/following': typeof UsernameFollowingRoute;
-  '/$username/presentations': typeof UsernamePresentationsRoute;
-  '/auth/signin': typeof AuthSigninRoute;
-  '/auth/signup': typeof AuthSignupRoute;
-  '/auth/verify': typeof AuthVerifyRoute;
-  '/notes/$id': typeof NotesIdRoute;
-  '/presentations/$id': typeof PresentationsIdRoute;
-  '/presentations/new': typeof PresentationsNewRoute;
-  '/timeline/public': typeof TimelinePublicRoute;
-  '/presentations/': typeof PresentationsIndexRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/$username': typeof UsernameRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/follow-requests': typeof FollowRequestsRoute
+  '/home': typeof HomeRoute
+  '/invitations': typeof InvitationsRoute
+  '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
+  '/upload': typeof UploadRoute
+  '/$username/followers': typeof UsernameFollowersRoute
+  '/$username/following': typeof UsernameFollowingRoute
+  '/$username/presentations': typeof UsernamePresentationsRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/auth/verify': typeof AuthVerifyRoute
+  '/notes/$id': typeof NotesIdRoute
+  '/presentations/$id': typeof PresentationsIdRoute
+  '/presentations/new': typeof PresentationsNewRoute
+  '/timeline/public': typeof TimelinePublicRoute
+  '/presentations/': typeof PresentationsIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/$username'
@@ -220,8 +220,8 @@ export interface FileRouteTypes {
     | '/presentations/$id'
     | '/presentations/new'
     | '/timeline/public'
-    | '/presentations/';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/presentations/'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$username'
@@ -242,7 +242,7 @@ export interface FileRouteTypes {
     | '/presentations/$id'
     | '/presentations/new'
     | '/timeline/public'
-    | '/presentations';
+    | '/presentations'
   id:
     | '__root__'
     | '/'
@@ -264,189 +264,189 @@ export interface FileRouteTypes {
     | '/presentations/$id'
     | '/presentations/new'
     | '/timeline/public'
-    | '/presentations/';
-  fileRoutesById: FileRoutesById;
+    | '/presentations/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  UsernameRoute: typeof UsernameRouteWithChildren;
-  DashboardRoute: typeof DashboardRoute;
-  FollowRequestsRoute: typeof FollowRequestsRoute;
-  HomeRoute: typeof HomeRoute;
-  InvitationsRoute: typeof InvitationsRoute;
-  SearchRoute: typeof SearchRoute;
-  SettingsRoute: typeof SettingsRoute;
-  UploadRoute: typeof UploadRoute;
-  AuthSigninRoute: typeof AuthSigninRoute;
-  AuthSignupRoute: typeof AuthSignupRoute;
-  AuthVerifyRoute: typeof AuthVerifyRoute;
-  NotesIdRoute: typeof NotesIdRoute;
-  PresentationsIdRoute: typeof PresentationsIdRoute;
-  PresentationsNewRoute: typeof PresentationsNewRoute;
-  TimelinePublicRoute: typeof TimelinePublicRoute;
-  PresentationsIndexRoute: typeof PresentationsIndexRoute;
+  IndexRoute: typeof IndexRoute
+  UsernameRoute: typeof UsernameRouteWithChildren
+  DashboardRoute: typeof DashboardRoute
+  FollowRequestsRoute: typeof FollowRequestsRoute
+  HomeRoute: typeof HomeRoute
+  InvitationsRoute: typeof InvitationsRoute
+  SearchRoute: typeof SearchRoute
+  SettingsRoute: typeof SettingsRoute
+  UploadRoute: typeof UploadRoute
+  AuthSigninRoute: typeof AuthSigninRoute
+  AuthSignupRoute: typeof AuthSignupRoute
+  AuthVerifyRoute: typeof AuthVerifyRoute
+  NotesIdRoute: typeof NotesIdRoute
+  PresentationsIdRoute: typeof PresentationsIdRoute
+  PresentationsNewRoute: typeof PresentationsNewRoute
+  TimelinePublicRoute: typeof TimelinePublicRoute
+  PresentationsIndexRoute: typeof PresentationsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/upload': {
-      id: '/upload';
-      path: '/upload';
-      fullPath: '/upload';
-      preLoaderRoute: typeof UploadRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/upload'
+      path: '/upload'
+      fullPath: '/upload'
+      preLoaderRoute: typeof UploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
-      id: '/settings';
-      path: '/settings';
-      fullPath: '/settings';
-      preLoaderRoute: typeof SettingsRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
-      id: '/search';
-      path: '/search';
-      fullPath: '/search';
-      preLoaderRoute: typeof SearchRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/invitations': {
-      id: '/invitations';
-      path: '/invitations';
-      fullPath: '/invitations';
-      preLoaderRoute: typeof InvitationsRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/invitations'
+      path: '/invitations'
+      fullPath: '/invitations'
+      preLoaderRoute: typeof InvitationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/home': {
-      id: '/home';
-      path: '/home';
-      fullPath: '/home';
-      preLoaderRoute: typeof HomeRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/follow-requests': {
-      id: '/follow-requests';
-      path: '/follow-requests';
-      fullPath: '/follow-requests';
-      preLoaderRoute: typeof FollowRequestsRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/follow-requests'
+      path: '/follow-requests'
+      fullPath: '/follow-requests'
+      preLoaderRoute: typeof FollowRequestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
-      id: '/dashboard';
-      path: '/dashboard';
-      fullPath: '/dashboard';
-      preLoaderRoute: typeof DashboardRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$username': {
-      id: '/$username';
-      path: '/$username';
-      fullPath: '/$username';
-      preLoaderRoute: typeof UsernameRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/$username'
+      path: '/$username'
+      fullPath: '/$username'
+      preLoaderRoute: typeof UsernameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/presentations/': {
-      id: '/presentations/';
-      path: '/presentations';
-      fullPath: '/presentations/';
-      preLoaderRoute: typeof PresentationsIndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/presentations/'
+      path: '/presentations'
+      fullPath: '/presentations/'
+      preLoaderRoute: typeof PresentationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timeline/public': {
-      id: '/timeline/public';
-      path: '/timeline/public';
-      fullPath: '/timeline/public';
-      preLoaderRoute: typeof TimelinePublicRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/timeline/public'
+      path: '/timeline/public'
+      fullPath: '/timeline/public'
+      preLoaderRoute: typeof TimelinePublicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/presentations/new': {
-      id: '/presentations/new';
-      path: '/presentations/new';
-      fullPath: '/presentations/new';
-      preLoaderRoute: typeof PresentationsNewRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/presentations/new'
+      path: '/presentations/new'
+      fullPath: '/presentations/new'
+      preLoaderRoute: typeof PresentationsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/presentations/$id': {
-      id: '/presentations/$id';
-      path: '/presentations/$id';
-      fullPath: '/presentations/$id';
-      preLoaderRoute: typeof PresentationsIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/presentations/$id'
+      path: '/presentations/$id'
+      fullPath: '/presentations/$id'
+      preLoaderRoute: typeof PresentationsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notes/$id': {
-      id: '/notes/$id';
-      path: '/notes/$id';
-      fullPath: '/notes/$id';
-      preLoaderRoute: typeof NotesIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/notes/$id'
+      path: '/notes/$id'
+      fullPath: '/notes/$id'
+      preLoaderRoute: typeof NotesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/verify': {
-      id: '/auth/verify';
-      path: '/auth/verify';
-      fullPath: '/auth/verify';
-      preLoaderRoute: typeof AuthVerifyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/auth/verify'
+      path: '/auth/verify'
+      fullPath: '/auth/verify'
+      preLoaderRoute: typeof AuthVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/signup': {
-      id: '/auth/signup';
-      path: '/auth/signup';
-      fullPath: '/auth/signup';
-      preLoaderRoute: typeof AuthSignupRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/signin': {
-      id: '/auth/signin';
-      path: '/auth/signin';
-      fullPath: '/auth/signin';
-      preLoaderRoute: typeof AuthSigninRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/auth/signin'
+      path: '/auth/signin'
+      fullPath: '/auth/signin'
+      preLoaderRoute: typeof AuthSigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$username/presentations': {
-      id: '/$username/presentations';
-      path: '/presentations';
-      fullPath: '/$username/presentations';
-      preLoaderRoute: typeof UsernamePresentationsRouteImport;
-      parentRoute: typeof UsernameRoute;
-    };
+      id: '/$username/presentations'
+      path: '/presentations'
+      fullPath: '/$username/presentations'
+      preLoaderRoute: typeof UsernamePresentationsRouteImport
+      parentRoute: typeof UsernameRoute
+    }
     '/$username/following': {
-      id: '/$username/following';
-      path: '/following';
-      fullPath: '/$username/following';
-      preLoaderRoute: typeof UsernameFollowingRouteImport;
-      parentRoute: typeof UsernameRoute;
-    };
+      id: '/$username/following'
+      path: '/following'
+      fullPath: '/$username/following'
+      preLoaderRoute: typeof UsernameFollowingRouteImport
+      parentRoute: typeof UsernameRoute
+    }
     '/$username/followers': {
-      id: '/$username/followers';
-      path: '/followers';
-      fullPath: '/$username/followers';
-      preLoaderRoute: typeof UsernameFollowersRouteImport;
-      parentRoute: typeof UsernameRoute;
-    };
+      id: '/$username/followers'
+      path: '/followers'
+      fullPath: '/$username/followers'
+      preLoaderRoute: typeof UsernameFollowersRouteImport
+      parentRoute: typeof UsernameRoute
+    }
   }
 }
 
 interface UsernameRouteChildren {
-  UsernameFollowersRoute: typeof UsernameFollowersRoute;
-  UsernameFollowingRoute: typeof UsernameFollowingRoute;
-  UsernamePresentationsRoute: typeof UsernamePresentationsRoute;
+  UsernameFollowersRoute: typeof UsernameFollowersRoute
+  UsernameFollowingRoute: typeof UsernameFollowingRoute
+  UsernamePresentationsRoute: typeof UsernamePresentationsRoute
 }
 
 const UsernameRouteChildren: UsernameRouteChildren = {
   UsernameFollowersRoute: UsernameFollowersRoute,
   UsernameFollowingRoute: UsernameFollowingRoute,
   UsernamePresentationsRoute: UsernamePresentationsRoute,
-};
+}
 
 const UsernameRouteWithChildren = UsernameRoute._addFileChildren(
   UsernameRouteChildren,
-);
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -466,16 +466,16 @@ const rootRouteChildren: RootRouteChildren = {
   PresentationsNewRoute: PresentationsNewRoute,
   TimelinePublicRoute: TimelinePublicRoute,
   PresentationsIndexRoute: PresentationsIndexRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx';
-import type { createStart } from '@tanstack/react-start';
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true;
-    router: Awaited<ReturnType<typeof getRouter>>;
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }

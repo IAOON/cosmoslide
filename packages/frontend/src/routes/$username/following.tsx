@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { userApi } from '@/lib/api';
 import UserCard from '@/components/UserCard';
+import AppLayout from '@/components/AppLayout';
 
 export const Route = createFileRoute('/$username/following')({
   component: FollowingPage,
@@ -88,7 +89,7 @@ function FollowingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
           <Link
@@ -137,6 +138,6 @@ function FollowingPage() {
           )}
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

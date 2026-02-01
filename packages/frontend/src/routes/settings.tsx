@@ -7,6 +7,7 @@ import {
 import { useState, useEffect } from 'react';
 import { userApi, uploadApi } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import AppLayout from '@/components/AppLayout';
 
 export const Route = createFileRoute('/settings')({
   beforeLoad: () => {
@@ -171,7 +172,7 @@ function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -507,6 +508,6 @@ function SettingsPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

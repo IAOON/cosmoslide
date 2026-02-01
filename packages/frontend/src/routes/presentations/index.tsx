@@ -7,6 +7,7 @@ import {
 import { useState, useEffect, useRef } from 'react';
 import { userApi } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import AppLayout from '@/components/AppLayout';
 
 export const Route = createFileRoute('/presentations/')({
   beforeLoad: () => {
@@ -83,7 +84,7 @@ function PresentationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div
         className={`fixed z-50 left-1/2 -translate-x-1/2 bottom-8 px-6 py-3 rounded shadow-lg text-white text-sm font-medium transition-opacity duration-500 ${toast.color || 'bg-green-600'} ${toast.show ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         style={{ minWidth: 180 }}
@@ -209,6 +210,6 @@ function PresentationsPage() {
           )}
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

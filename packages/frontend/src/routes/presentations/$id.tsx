@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { uploadApi } from '@/lib/api';
+import AppLayout from '@/components/AppLayout';
 
 const PresentationViewer = lazy(
   () => import('@/components/PresentationViewer'),
@@ -99,7 +100,7 @@ function PresentationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
@@ -147,6 +148,6 @@ function PresentationPage() {
           </Suspense>
         )}
       </div>
-    </div>
+    </AppLayout>
   );
 }

@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import ProfileLink from '@/components/ProfileLink';
 import { notesApi } from '@/lib/api';
 import NoteComposer from '@/components/NoteComposer';
+import AppLayout from '@/components/AppLayout';
 
 export const Route = createFileRoute('/notes/$id')({
   component: NoteDetailPage,
@@ -118,7 +119,7 @@ function NoteDetailPage() {
   const isOwner = currentUser && author?.id === currentUser.id;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
           <button
@@ -242,6 +243,6 @@ function NoteDetailPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

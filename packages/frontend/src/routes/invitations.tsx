@@ -7,6 +7,7 @@ import {
 import { useState, useEffect } from 'react';
 import { invitationApi, Invitation } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import AppLayout from '@/components/AppLayout';
 
 export const Route = createFileRoute('/invitations')({
   beforeLoad: () => {
@@ -132,7 +133,7 @@ function InvitationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <AppLayout>
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -351,6 +352,6 @@ function InvitationsPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

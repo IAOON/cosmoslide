@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { notesApi } from '@/lib/api';
 import NoteCard from '@/components/NoteCard';
-import NavigationHeader from '@/components/NavigationHeader';
+import AppLayout from '@/components/AppLayout';
 import TimelineTabs from '@/components/TimelineTabs';
 import type { Note } from '@/lib/types';
 
@@ -55,50 +55,47 @@ function PublicTimelinePage() {
   };
 
   return (
-    <>
-      <NavigationHeader />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-2xl mx-auto px-4 py-8">
-          {/* Header */}
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Public Timeline
-            </h1>
+    <AppLayout>
+      <div className="max-w-2xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            Public Timeline
+          </h1>
 
-            {/* Navigation Tabs */}
-            <TimelineTabs activeTab="public" />
-          </div>
+          {/* Navigation Tabs */}
+          <TimelineTabs activeTab="public" />
+        </div>
 
-          {/* Timeline */}
-          <div className="space-y-2">
-            {notes.length === 0 ? (
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
-                <p className="text-gray-500 dark:text-gray-400">
-                  No public posts yet
-                </p>
-              </div>
-            ) : (
-              <>
-                {notes.map((note) => (
-                  <NoteCard key={note.id} note={note} />
-                ))}
+        {/* Timeline */}
+        <div className="space-y-2">
+          {notes.length === 0 ? (
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
+              <p className="text-gray-500 dark:text-gray-400">
+                No public posts yet
+              </p>
+            </div>
+          ) : (
+            <>
+              {notes.map((note) => (
+                <NoteCard key={note.id} note={note} />
+              ))}
 
-                {hasMore && (
-                  <div className="pt-4 flex justify-center">
-                    <button
-                      onClick={handleLoadMore}
-                      disabled={loadingMore}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {loadingMore ? 'Loading...' : 'Load More'}
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+              {hasMore && (
+                <div className="pt-4 flex justify-center">
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {loadingMore ? 'Loading...' : 'Load More'}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
-    </>
+    </AppLayout>
   );
 }

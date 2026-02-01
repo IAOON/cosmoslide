@@ -7,6 +7,7 @@ COPY package.json yarn.lock ./
 COPY packages/admin/package.json ./packages/admin/
 COPY packages/backend/package.json ./packages/backend/
 COPY packages/frontend/package.json ./packages/frontend/
+COPY packages/editor/package.json ./packages/editor/
 
 # Install dependencies
 RUN yarn install --frozen-lockfile

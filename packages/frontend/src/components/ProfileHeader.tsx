@@ -80,7 +80,7 @@ export default function ProfileHeader({
             />
           </div>
 
-          {!isOwnProfile && (
+          {!isOwnProfile && currentUser && (
             <button
               onClick={onFollow}
               disabled={followLoading}
